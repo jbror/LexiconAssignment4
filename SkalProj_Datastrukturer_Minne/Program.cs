@@ -228,6 +228,27 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineStack()
         {
+
+            Console.WriteLine("Enter text and i will reverse it back to you.\nInput: ");
+            string input = Console.ReadLine();
+
+            Stack<char> stack  = new Stack<char>();
+
+            foreach (char c in input)
+            {
+                stack.Push(c);
+            }
+
+            Console.WriteLine("Text reversed: ");
+
+            while (stack.Count > 0)
+            {
+                Console.WriteLine(stack.Pop());
+            }
+
+
+
+
             /*
              * Loop this method until the user inputs something to exit to main menue.
              * Create a switch with cases to push or pop items
