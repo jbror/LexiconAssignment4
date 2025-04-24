@@ -76,7 +76,7 @@ namespace SkalProj_Datastrukturer_Minne
                 Console.WriteLine("Enter something to add or remove in my list! (+Input or -Input is accepted)");
                 Console.WriteLine("If you want to exit enter exit");
                 Console.WriteLine("-----------------");
-                Console.WriteLine($"List count and capacity is at the moment: Count: {theList.Count} Capacity: {theList.Capacity}" );
+                Console.WriteLine($"List count and capacity is at the moment: Count: {theList.Count} Capacity: {theList.Capacity}");
                 Console.WriteLine("Enter input:");
 
                 string input = Console.ReadLine();
@@ -85,10 +85,10 @@ namespace SkalProj_Datastrukturer_Minne
                     Console.WriteLine("Bye bye");
                     break;
                 }
-                if(string.IsNullOrEmpty(input))
+                if (string.IsNullOrEmpty(input))
                 {
                     Console.WriteLine("Input can't be empty!\n");
-                        continue;
+                    continue;
                 }
                 if ((input[0] != '+' && input[0] != '-') || input.Length < 2 || char.IsWhiteSpace(input[1]))
                 {
@@ -99,7 +99,7 @@ namespace SkalProj_Datastrukturer_Minne
 
                 char nav = input[0];
                 string value = input.Substring(1).Trim();
-        
+
 
                 switch (nav)
                 {
@@ -116,7 +116,7 @@ namespace SkalProj_Datastrukturer_Minne
                         break;
 
                 }
-              
+
 
             }
 
@@ -139,18 +139,81 @@ namespace SkalProj_Datastrukturer_Minne
             //switch(nav){...}
         }
 
-            /// <summary>
-            /// Examines the datastructure Queue
-            /// </summary>
-            static void ExamineQueue()
+        /// <summary>
+        /// Examines the datastructure Queue
+        /// </summary>
+        static void ExamineQueue()
         {
+
+
+            Queue<string> queue = new Queue<string>();
+
+            while (true)
+            {
+                Console.WriteLine("\n-- ICA Queue  --");
+                Console.WriteLine("1. Enqueue  person");
+                Console.WriteLine("2. Dequeue (serve) the first person");
+                Console.WriteLine("3. Show  current queue");
+                Console.WriteLine("4. Return to main menu");
+                Console.Write("Choose an option: ");
+
+                string input = Console.ReadLine();
+
+                switch (input)
+                {
+
+                    case "1":
+                        Console.Write("Enter the name of the person to enqueue: ");
+                        string name = Console.ReadLine();
+                        queue.Enqueue(name);
+                        Console.WriteLine($"{name} has entered the queue.");
+                        break;
+
+                    case "2":
+                        if (queue.Count > 0)
+                        {
+                            string served = queue.Dequeue();
+                            Console.WriteLine($"{served} has been served and removed from the queue.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The queue is empty. No one to serve.");
+                        }
+                        break;
+
+                    case "3":
+                        Console.WriteLine("people currently in the queue:");
+                        foreach (var person in queue)
+                        {
+
+                            Console.WriteLine(person);
+                        }
+                        if (queue.Count == 0)
+                        {
+                            Console.WriteLine("The queue is empty.");
+                        }
+                        break;
+
+                    case "4":
+                        return;
+
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+            }
+
+
             /*
              * Loop this method untill the user inputs something to exit to main menue.
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
-        }
 
+
+
+
+        }
         /// <summary>
         /// Examines the datastructure Stack
         /// </summary>
