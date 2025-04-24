@@ -145,6 +145,15 @@ namespace SkalProj_Datastrukturer_Minne
         static void ExamineQueue()
         {
 
+        // I en "kö"(Queeue) så läggs element till i ordning liknande en tradionell "kö".
+        // Om kön på Ica är tom och jag ställer mig i kön är jag alltså först i kön och kommer få hjäp och lämmna kön först.
+        // Kalle som ställde sig i kön efter mig blir först i kön när jag blir expiderad osv. 
+
+        // Ica kön [ ] (Tom kö)
+        // Ica kön [Bror] (Jag ställer mig i kön)
+        // Ica kön [Bror, Kalle] (Kalle ansluter till kön)
+        // Ica kön [Kalle] (Jag blir expideras och lämmnar kön. Kalle är nu först i kön)
+
 
             Queue<string> queue = new Queue<string>();
 
