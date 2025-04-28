@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SkalProj_Datastrukturer_Minne
+﻿namespace SkalProj_Datastrukturer_Minne
 {
     class Program
     {
@@ -145,14 +143,14 @@ namespace SkalProj_Datastrukturer_Minne
         static void ExamineQueue()
         {
 
-        // I en "kö"(Queeue) så läggs element till i ordning liknande en tradionell "kö".
-        // Om kön på Ica är tom och jag ställer mig i kön är jag alltså först i kön och kommer få hjäp och lämmna kön först.
-        // Kalle som ställde sig i kön efter mig blir först i kön när jag blir expiderad osv. 
+            // I en "kö"(Queeue) så läggs element till i ordning liknande en tradionell "kö".
+            // Om kön på Ica är tom och jag ställer mig i kön är jag alltså först i kön och kommer få hjäp och lämmna kön först.
+            // Kalle som ställde sig i kön efter mig blir först i kön när jag blir expiderad osv. 
 
-        // Ica kön [ ] (Tom kö)
-        // Ica kön [Bror] (Jag ställer mig i kön)
-        // Ica kön [Bror, Kalle] (Kalle ansluter till kön)
-        // Ica kön [Kalle] (Jag blir expideras och lämmnar kön. Kalle är nu först i kön)
+            // Ica kön [ ] (Tom kö)
+            // Ica kön [Bror] (Jag ställer mig i kön)
+            // Ica kön [Bror, Kalle] (Kalle ansluter till kön)
+            // Ica kön [Kalle] (Jag blir expideras och lämmnar kön. Kalle är nu först i kön)
 
 
             Queue<string> queue = new Queue<string>();
@@ -229,43 +227,125 @@ namespace SkalProj_Datastrukturer_Minne
         static void ExamineStack()
         {
 
-            Console.WriteLine("Enter text and i will reverse it back to you.\nInput: ");
-            string input = Console.ReadLine();
+            // I en Stack så läggs element EJ till i ordning liknande en tradionell "kö".
+            // Om kön på Ica är tom och jag ställer mig i kön och sedan Kalle är det inte jag som får "hjälp/lämmna" kön först.
+            // Kalle som ställde sig i kön efter mig är överst i Stacken och jag kan inte få hjälp/expideras innan Kalle. 
 
-            Stack<char> stack  = new Stack<char>();
+            // Ica kön [ ] (Tom kö)
+            // Ica kön [Bror] (Jag ställer mig i kön)
+            // Ica kön [Kalle, Bror] (Kalle ansluter till kön och är nu "först")
+            // Ica kön [Bror] (Kalle blir expiderad och lämmnar kön. Bror är nu först i kön)
+            // I en Stack blir Först In Sist Ut vilket inte är så smart eller korrekt i en kö. 
 
-            foreach (char c in input)
+            while (true)
             {
-                stack.Push(c);
+                Console.WriteLine("\n-- Make a choice  --");
+                Console.WriteLine("1. Enter text and I will reverse it back to you");
+                Console.WriteLine("2. Return to main menu");
+                Console.Write("Choose an option: ");
+
+                string choice = Console.ReadLine(); // ändrat namn så vi inte krockar med input-texten
+
+                switch (choice)
+                {
+                    case "1":
+                        Console.WriteLine("Enter text and I will reverse it back to you.\nInput: ");
+                        string text = Console.ReadLine(); // nytt namn här också
+
+                        Stack<char> stack = new Stack<char>();
+
+                        foreach (char c in text)
+                        {
+                            stack.Push(c);
+                        }
+
+                        Console.Write("Text reversed: "); // skriv inte radbrytning direkt
+
+                        while (stack.Count > 0)
+                        {
+                            Console.Write(stack.Pop()); // använder Write istället för WriteLine
+                        }
+
+                        Console.WriteLine(); // radbrytning efter hela texten
+                        break;
+
+                    case "2":
+                        return; // avslutar metoden och går tillbaka till huvudmenyn
+
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
             }
 
-            Console.WriteLine("Text reversed: ");
-
-            while (stack.Count > 0)
-            {
-                Console.WriteLine(stack.Pop());
-            }
-
-
-
-
-            /*
-             * Loop this method until the user inputs something to exit to main menue.
-             * Create a switch with cases to push or pop items
-             * Make sure to look at the stack after pushing and and poping to see how it behaves
-            */
         }
+
+
+
+
+
+        /*
+         * Loop this method until the user inputs something to exit to main menue.
+         * Create a switch with cases to push or pop items
+         * Make sure to look at the stack after pushing and and poping to see how it behaves
+        */
+
+
 
         static void CheckParanthesis()
         {
+            Console.Write("Enter a string with parentheses. I will check if its correct or incorrect : "); // Be om input för att kontrollera om den är välformad eller ej
+            string input = Console.ReadLine();
+
+            Stack<char> stack = new Stack<char>(); // Skapar en stack för att hålla koll på parenteserna
+
+            foreach (char c in input)
+            {
+
+                if (c == '(' || c == '{' || c == '[')
+                {
+                    stack.Push(c); // Lägger till öppningsparentes i stacken
+                }
+                else if (c == ')' || c == '}' || c == ']')
+                {
+                    if (stack.Count == 0)
+                    {
+                        Console.WriteLine("The string is NOT well-formed!!.");
+                        return; // Ingen öppningsparentes att matcha med
+                    }
+
+                    char open = stack.Pop(); // Tar ut senaste öppnade parentes
+
+                    if ( (c == ')' && open != '(') ||
+                        (c == '}' && open != '{') ||
+                        (c == ']' && open != '[') )
+                    {
+                        Console.WriteLine("The string is NOT well-formed.");
+                        return; // Fel typ av matchning
+                    }
+                }
+                // Struntar i alla andra tecken 
+            }
+
+            if (stack.Count == 0)
+            {
+                Console.WriteLine("The string is well-formed!!");
+            }
+            else
+            {
+                Console.WriteLine("The string is NOT well-formed."); // Några öppna parenteser är kvar, ej välformad!
+            }
+
+
+
+
             /*
              * Use this method to check if the paranthesis in a string is Correct or incorrect.
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
-        }
 
+        }
     }
 }
-
