@@ -244,13 +244,13 @@
                 Console.WriteLine("2. Return to main menu");
                 Console.Write("Choose an option: ");
 
-                string choice = Console.ReadLine(); // ändrat namn så vi inte krockar med input-texten
+                string choice = Console.ReadLine(); // Fråga efter ett val
 
                 switch (choice)
                 {
                     case "1":
                         Console.WriteLine("Enter text and I will reverse it back to you.\nInput: ");
-                        string text = Console.ReadLine(); // nytt namn här också
+                        string text = Console.ReadLine(); // Be om en inputsträng 
 
                         Stack<char> stack = new Stack<char>();
 
@@ -259,11 +259,11 @@
                             stack.Push(c);
                         }
 
-                        Console.Write("Text reversed: "); // skriv inte radbrytning direkt
+                        Console.Write("Text reversed: "); 
 
                         while (stack.Count > 0)
                         {
-                            Console.Write(stack.Pop()); // använder Write istället för WriteLine
+                            Console.Write(stack.Pop()); // Skriver ut omvända texten på en och samma rad
                         }
 
                         Console.WriteLine(); // radbrytning efter hela texten
